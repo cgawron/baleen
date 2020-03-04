@@ -30,7 +30,7 @@ except ImportError:
 
 from baleen.feed import *
 from baleen.models import *
-from urlparse import urlparse
+from urllib.parse import urlparse
 from baleen.exceptions import FeedTypeError
 
 ##########################################################################
@@ -43,16 +43,16 @@ RESULT   = os.path.join(FIXTURES, "feedparser_result.pickle")
 
 # Feed Fixtures
 STR_FEED     = 'http://freakonomics.blogs.nytimes.com/feed/'
-UNICODE_FEED = u'http://blog.kaggle.com/feed/'
+UNICODE_FEED = 'http://blog.kaggle.com/feed/'
 OPML_FEED    = {
     "type":"rss", "text":"The Daily Notebook", "title":"The Daily Notebook",
     "xmlUrl":"https://mubi.com/notebook/posts.atom", "htmlUrl":"https://mubi.com/notebook/posts",
 }
 MONGO_FEED   = Feed(
-    title = u'The Rumpus.net',
-    link = u'http://therumpus.net/feed/',
-    urls = {u'htmlurl': u'http://therumpus.net'},
-    category = u'books',
+    title = 'The Rumpus.net',
+    link = 'http://therumpus.net/feed/',
+    urls = {'htmlurl': 'http://therumpus.net'},
+    category = 'books',
 )
 
 ##########################################################################
@@ -110,7 +110,7 @@ class FeedSyncTests(unittest.TestCase):
         Test that bad types raise an exception in sync
         """
         cases = (
-            10, {u'htmlurl': u'https://mubi.com/notebook/posts'}, ['a','b','c']
+            10, {'htmlurl': 'https://mubi.com/notebook/posts'}, ['a','b','c']
         )
 
         for case in cases:
@@ -163,7 +163,7 @@ class FeedSyncTests(unittest.TestCase):
         # Ensure that the mocking worked out for us
         assert mock_feedparser is feedparser.parse
 
-        feed = Feed(link = u'https://mubi.com/notebook/posts.atom')
+        feed = Feed(link = 'https://mubi.com/notebook/posts.atom')
         feed.etag = 'abcdefg'
 
         # Test Case 1: etag but no modified
@@ -201,9 +201,9 @@ class FeedSyncTests(unittest.TestCase):
         feed = Feed.objects.first()
 
         # Ensure that the various properties have been set.
-        self.assertEqual(feed.etag, u'W/"29e84abdc28e3fa87709d1f309b7c214-gzip"')
-        self.assertEqual(feed.modified, u'Wed, 02 Mar 2016 22:00:06 GMT')
-        self.assertEqual(feed.version, u'rss20')
+        self.assertEqual(feed.etag, 'W/"29e84abdc28e3fa87709d1f309b7c214-gzip"')
+        self.assertEqual(feed.modified, 'Wed, 02 Mar 2016 22:00:06 GMT')
+        self.assertEqual(feed.version, 'rss20')
         self.assertEqual(feed.link, MONGO_FEED.link)
         self.assertIsNotNone(feed.fetched)
 

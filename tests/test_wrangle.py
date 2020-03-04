@@ -39,9 +39,9 @@ from baleen.models import Feed, Post
 FIXTURES  = os.path.join(os.path.dirname(__file__), "fixtures")
 RESULT    = os.path.join(FIXTURES, "feedparser_result.pickle")
 FEED      = Feed(
-    title = u'The Rumpus.net',
-    link  = u'http://therumpus.net/feed/',
-    urls  = {u'htmlurl': u'http://therumpus.net'}, category = u'books',
+    title = 'The Rumpus.net',
+    link  = 'http://therumpus.net/feed/',
+    urls  = {'htmlurl': 'http://therumpus.net'}, category = 'books',
 )
 
 

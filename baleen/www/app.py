@@ -24,7 +24,7 @@ from baleen.models import Feed, Post, Job, Log
 from baleen.utils.timez import WEB_UTC_DATETIME
 
 from flask import Flask, render_template, request
-from flask.ext.mongoengine import MongoEngine
+from flask_mongoengine import MongoEngine
 from flask_humanize import Humanize
 
 ##########################################################################

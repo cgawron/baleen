@@ -31,7 +31,7 @@ def csv(ptype=int):
     def parser(s):
         try:
             parse = lambda p: ptype(p.strip())
-            return map(parse, s.split(","))
+            return list(map(parse, s.split(",")))
         except Exception:
             raise argparse.ArgumentTypeError(
                 "Could not parse CSV value to type {}: {!r}".format(ptype.__name__, s)

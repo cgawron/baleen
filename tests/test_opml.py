@@ -63,7 +63,7 @@ class LoadOPMLTests(MongoTestMixin, unittest.TestCase):
         self.assertEqual(load_opml(FEEDLY), 36)
         self.assertEqual(Feed.objects.count(), 36)
 
-        for _ in xrange(10):
+        for _ in range(10):
             self.assertEqual(load_opml(FEEDLY), 0)
             self.assertEqual(Feed.objects.count(), 36)
 
@@ -86,22 +86,22 @@ class OPMLTests(unittest.TestCase):
         """
         opml = OPML(FEEDLY)
         expected = [
-            u'news',
-            u'do it yourself',
-            u'business',
-            u'gaming',
-            u'data science',
-            u'essays',
-            u'politics',
-            u'tech',
-            u'cinema',
-            u'books',
-            u'sports',
-            u'cooking',
-            u'design'
+            'news',
+            'do it yourself',
+            'business',
+            'gaming',
+            'data science',
+            'essays',
+            'politics',
+            'tech',
+            'cinema',
+            'books',
+            'sports',
+            'cooking',
+            'design'
         ]
 
-        print list(opml.categories())
+        print(list(opml.categories()))
 
         self.assertEqual(list(opml.categories()), expected)
 
@@ -134,7 +134,7 @@ class OPMLTests(unittest.TestCase):
         }
         counts = opml.counts()
 
-        for key, val in expected.items():
+        for key, val in list(expected.items()):
             self.assertIn(key, counts)
             self.assertEqual(
                 counts[key], val,
@@ -150,4 +150,4 @@ class OPMLTests(unittest.TestCase):
         attrs = ['category', 'title', 'text', 'htmlUrl', 'xmlUrl', 'type']
         for item in opml:
             self.assertTrue(isinstance(item, dict))
-            self.assertEqual(item.keys(), attrs)
+            self.assertEqual(list(item.keys()), attrs)
