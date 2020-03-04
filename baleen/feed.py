@@ -76,7 +76,7 @@ class FeedSync(object):
         """
         Returns the type of the feed.
         """
-        if isinstance(self.feed, basestring):
+        if isinstance(self.feed, str):
             return self.URL
 
         if isinstance(self.feed, Feed):
@@ -157,7 +157,7 @@ class FeedSync(object):
             self.feed.link = result.href
 
         # Update the feed items from the result.
-        for key, val in result.feed.items():
+        for key, val in list(result.feed.items()):
             if key in FEEDPARSER_IGNORABLE_FIELDS:
                 # Ignore these generated or protected fields.
                 continue

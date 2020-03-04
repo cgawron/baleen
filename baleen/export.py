@@ -75,7 +75,7 @@ class MongoExporter(object):
         During export, this list is used to construct a feed-category mapping
         that is used to perform checking of sequential reads of Posts.
         """
-        if isinstance(categories, basestring):
+        if isinstance(categories, str):
             categories = [categories]
         elif categories is None:
             categories = self.categories
@@ -113,7 +113,7 @@ class MongoExporter(object):
         # Iterate through all posts that have the given feed ids without
         # dereferencing the related object. Yield (post, category) tuples.
         # This method also counts the number of posts per category.
-        for post in Post.objects(feed__in=feeds.keys()).no_dereference().no_cache():
+        for post in Post.objects(feed__in=list(feeds.keys())).no_dereference().no_cache():
             category = feeds[post.feed.id]
             self.counts[category] += 1
 
@@ -148,7 +148,7 @@ class MongoExporter(object):
         ]
 
         # Append category counts list to the README
-        for item in sorted(self.counts.items(), key=itemgetter(0)):
+        for item in sorted(list(self.counts.items()), key=itemgetter(0)):
             output.append("- {}: {}".format(*item))
 
         # Add a newline at the end of the README
